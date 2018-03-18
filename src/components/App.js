@@ -1,6 +1,7 @@
 import { createClass } from 'react'
 import { SkiDayList } from './SkiDayList'
 import { SkiDayCount } from './SkiDayCount'
+import { AddDayForm } from './AddDayForm';
 export const App = createClass({
     getInitialState() {
         return {
@@ -34,11 +35,15 @@ export const App = createClass({
     render() {
         return (
             <div className="app">
-                <SkiDayList days={this.state.allSkiDays}/>
+            {(this.props.location.pathname === "/") ? 
                 <SkiDayCount total={this.countDays()}
-                             powder={this.countDays("powder")}
-                             backcountry={this.countDays("backcountry")}/>
-            </div>
+                powder={this.countDays("powder")}
+                backcountry={this.countDays("backcountry")}/> : 
+
+                (this.props.location.pathname === "/add-day") ? <AddDayForm/> : 
+                <SkiDayList days={this.state.allSkiDays}/>
+            }
+             </div>
         )
     }
 })
