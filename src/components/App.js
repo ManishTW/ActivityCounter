@@ -10,19 +10,19 @@ export const App = createClass({
             allSkiDays:[
                 {
                     resort:"Square Valley",
-                    date: new Date("1/12/2018"),
+                    date: "1/12/2018",
                     powder:true,
                     backcountry:false
                 },
                 {
                     resort:"Kirkwood",
-                    date: new Date("12/12/2016"),
+                    date: "12/12/2016",
                     powder:false,
                     backcountry:false
                 },
                 {
                     resort:"Shera Valley",
-                    date: new Date("4/9/2017"),
+                    date: "4/9/2017",
                     powder:false,
                     backcountry:true
                 }
@@ -34,6 +34,15 @@ export const App = createClass({
         return allSkiDays.filter(
             (day) => (filter) ? day[filter] : day).length
     },
+    addDay(newDay) {
+        this.setState( {
+            allSkiDays : [
+                ...this.state.allSkiDays,
+                newDay
+            ]
+        })
+    },
+
     render() {
         return (
             <div className="app">
@@ -44,7 +53,7 @@ export const App = createClass({
                 backcountry={this.countDays("backcountry")}/> : 
 
                 (this.props.location.pathname === "/add-day") ? 
-                <AddDayForm/> : 
+                <AddDayForm onNewDay={this.addDay}/> : 
                 <SkiDayList days={this.state.allSkiDays}
                             filter={this.props.params.filter }/>
             }
