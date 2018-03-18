@@ -43,8 +43,10 @@ export const App = createClass({
                 powder={this.countDays("powder")}
                 backcountry={this.countDays("backcountry")}/> : 
 
-                (this.props.location.pathname === "/add-day") ? <AddDayForm/> : 
-                <SkiDayList days={this.state.allSkiDays}/>
+                (this.props.location.pathname === "/add-day") ? 
+                <AddDayForm/> : 
+                <SkiDayList days={this.state.allSkiDays}
+                            filter={this.props.params.filter }/>
             }
              </div>
         )
